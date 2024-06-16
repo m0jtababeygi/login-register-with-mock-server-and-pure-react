@@ -1,0 +1,66 @@
+
+.card {
+    font-size: 2rem;
+    padding: 4rem;
+  }
+  
+  .title {
+    text-align: center;
+    border-bottom: 1px solid rgb(119, 119, 119);
+    padding-bottom: 1.5rem;
+  }
+  
+  .div {
+    margin: 1.5rem auto 4rem;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .input {
+    border: 1px solid rgb(85 84 84);
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    line-height: 2.2;
+    font-size: 1.8rem;
+  }
+  
+  .btn {
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 1rem;
+    background-color: #dd60be;
+    color: #4e33dd;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 1.2rem;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #dd60be;
+    padding: 0 1rem;
+  }
+  
+  .error {
+    color: red;
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+  }
+  
+  .checkboxContainer input {
+    border-radius: 0.125rem;
+    height: 2rem;
+    width: 2rem;
+    margin-left: 0;
+  }
+  
+  .checkboxContainer label {
+    margin-left: 0.8rem;
+  }

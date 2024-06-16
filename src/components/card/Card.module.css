@@ -1,0 +1,12 @@
+.card {
+  margin: 0 auto;
+  width: max-content;
+  max-width: 80vw;
+  background-color: rgb(233 239 243);
+  padding: 2rem;
+  position: relative;
+  top: 12rem;
+  max-height: 70vh;
+  overflow: auto;
+  border-radius: 1rem;
+}
