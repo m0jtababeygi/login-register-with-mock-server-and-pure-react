@@ -1,66 +1,131 @@
-
-.card {
+/* General Styles */
+.register__card {
     font-size: 2rem;
     padding: 4rem;
+    box-sizing: border-box;
+    max-width: 500px;
+    margin: 0 auto;
   }
   
-  .title {
+  .register__title {
     text-align: center;
-    border-bottom: 1px solid rgb(119, 119, 119);
+    border-bottom: 1px solid #777;
     padding-bottom: 1.5rem;
   }
   
-  .div {
-    margin: 1.5rem auto 4rem;
+  .register__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  .label {
+  .register__form-group {
+    margin: 1.5rem 0;
+    width: 100%;
+  }
+  
+  .register__label {
     display: block;
     margin-bottom: 1rem;
   }
   
-  .input {
-    border: 1px solid rgb(85 84 84);
-    border-radius: 5px;
-    outline: none;
-    width: 100%;
-    line-height: 2.2;
-    font-size: 1.8rem;
-  }
-  
-  .btn {
-    font-size: 2rem;
-    border-radius: 0.5rem;
-    border: none;
-    outline: none;
+  .register__input {
     width: 100%;
     padding: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+  }
+  
+  .register__button {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 0.5rem;
     background-color: #dd60be;
     color: #4e33dd;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 1.2rem;
+    box-sizing: border-box;
   }
   
-  .link {
-    text-decoration: none;
+  .register__text {
+    font-size: 1.8rem;
+  }
+  
+  .register__link {
     color: #dd60be;
-    padding: 0 1rem;
+    text-decoration: none;
   }
   
-  .error {
+  .register__error {
     color: red;
-    margin: 0.5rem 0 0;
-    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
   }
   
-  .checkboxContainer input {
-    border-radius: 0.125rem;
-    height: 2rem;
-    width: 2rem;
-    margin-left: 0;
+  .register__password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
   }
   
-  .checkboxContainer label {
-    margin-left: 0.8rem;
+  .register__password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    padding: 0.5rem;
   }
+  
+  .register__select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 480px) {
+    .register__card {
+      padding: 2rem;
+      font-size: 1.5rem;
+    }
+  
+    .register__title {
+      font-size: 1.5rem;
+    }
+  
+    .register__input {
+      font-size: 1.5rem;
+    }
+  
+    .register__button {
+      font-size: 1.5rem;
+    }
+  
+    .register__text {
+      font-size: 1.5rem;
+    }
+  
+    .register__password-toggle {
+      font-size: 1.5rem;
+    }
+  
+    .register__error {
+      font-size: 1rem;
+    }
+  
+    .register__select {
+      font-size: 1.5rem;
+    }
+  }
+  

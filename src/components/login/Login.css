@@ -1,65 +1,143 @@
-.card {
+.login__card {
   font-size: 2rem;
   padding: 4rem;
+  box-sizing: border-box;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.title {
+.login__title {
   text-align: center;
-  border-bottom: 1px solid rgb(119, 119, 119);
+  border-bottom: 1px solid #777;
   padding-bottom: 1.5rem;
 }
 
-.div {
-  margin: 1.5rem auto 4rem;
+.login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.label {
+.login__form-group {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.login__label {
   display: block;
   margin-bottom: 1rem;
 }
 
-.input {
-  border: 1px solid rgb(85 84 84);
-  border-radius: 5px;
-  outline: none;
-  width: 100%;
-  line-height: 2.2;
-  font-size: 1.8rem;
-}
-
-.btn {
-  font-size: 2rem;
-  border-radius: 0.5rem;
-  border: none;
-  outline: none;
+.login__input {
   width: 100%;
   padding: 1rem;
+  border: 1px solid #555;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  box-sizing: border-box;
+}
+
+.login__button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  border: none;
+  border-radius: 0.5rem;
   background-color: #dd60be;
   color: #4e33dd;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 1.2rem;
+  box-sizing: border-box;
 }
 
-.link {
-  text-decoration: none;
-  color: #dd60be;
-  padding: 0 1rem;
-}
-
-.error {
-  color: red;
-  margin: 0.5rem 0 0;
-  font-size: 1rem;
-}
-
-.checkboxContainer input {
-  border-radius: 0.125rem;
-  height: 2rem;
+.login__checkbox {
   width: 2rem;
-  margin-left: 0;
+  height: 2rem;
+  margin-right: 1rem;
 }
 
-.checkboxContainer label {
-  margin-left: 0.8rem;
+.login__checkbox-label {
+  font-size: 1.8rem;
+}
+
+.login__form-group--checkbox {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.login__text {
+  font-size: 1.8rem;
+}
+
+.login__link {
+  color: #dd60be;
+  text-decoration: none;
+}
+
+.login__error {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.login__password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.login__password-toggle {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  padding: 0.5rem;
+}
+
+/*********************************************** Mobile Styles ********************************************/
+@media (max-width: 480px) {
+  .login__card {
+    width: 100vw;
+    padding: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .login__title {
+    font-size: 1.5rem;
+  }
+
+  .login__input {
+    font-size: 1.5rem;
+  }
+
+  .login__button {
+    font-size: 1.5rem;
+  }
+
+  .login__checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .login__checkbox-label {
+    font-size: 1.5rem;
+  }
+
+  .login__text {
+    font-size: 1.5rem;
+  }
+
+  .login__password-toggle {
+    font-size: 1.5rem;
+  }
+
+  .login__error {
+    font-size: 1rem;
+  }
 }

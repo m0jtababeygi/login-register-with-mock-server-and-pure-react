@@ -1,4 +1,4 @@
-import { Users } from "../models/users";
+import { Users } from "../models/Users";
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import { DashboardRoute } from "../../pages/routes";

@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Card from '../UI/card/Card';
 import { RegisterRoute } from '../../pages/routes';
-import { Users } from '../models/users';
+import { Users } from '../models/Users';
 import { DashboardRoute } from './../../pages/routes';
 import Notification from '../../share/notification/Notification';
 import Spinner from '../../share/spinner/Spinner';
-import Card from '../../components/card/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import './Login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Partial<Users>>({});
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [notification, setNotification] = useState<{
     message: string
     type: 'success' | 'error' | 'warning' | 'info'
@@ -115,7 +115,11 @@ const Login = () => {
 
   return (
     <>
-      {loading && <Spinner />};
+      {loading && (
+        <div className="backdrop">
+          <Spinner />
+        </div>
+      )}
       {notification && (
         <Notification
           message={notification.message}
@@ -125,79 +129,84 @@ const Login = () => {
           dismissible={notification.dismissible}
         />
       )}
-      <Card className="card">
-        <h3 className="title">Login</h3>
-        <form onSubmit={loginHandler}>
-          <div className="div">
-            <label className="label" htmlFor="username">
-              username
+      <Card className="login__card">
+        <h3 className="login__title">Login</h3>
+        <form className="login__form" onSubmit={loginHandler}>
+          <div className="login__form-group">
+            <label className="login__label" htmlFor="username">
+              Username
             </label>
             <input
-              className="input"
+              className="login__input"
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             {errors.username && (
-              <p className="error">{errors.username}</p>
+              <p className="login__error">{errors.username}</p>
             )}
           </div>
-          <div className="div">
-            <label className="label" htmlFor="password">
+          <div className="login__form-group">
+            <label className="login__label" htmlFor="password">
               Password
             </label>
-            <input
-              className="input"
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="button" 
-            onClick={() => setShowPassword(!showPassword)}
-            className="login-form__password-toggle"
-            >
+            <div className="login__password-container">
+              <input
+                className="login__input"
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className="login__password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
                 <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-            </button>
+              </button>
+            </div>
             {errors.password && (
-              <p className="error">{errors.password}</p>
+              <p className="login__error">{errors.password}</p>
             )}
             {errors.passwordDetails &&
               errors.passwordDetails.map((error, index) => (
-                <p key={index} className="error">
+                <p key={index} className="login__error">
                   {error}
                 </p>
               ))}
           </div>
-          <div>
-            <button type="submit" className="btn">
+          <div className="login__form-group">
+            <button type="submit" className="login__button">
               Login
             </button>
           </div>
-          <div className="div checkboxContainer">
+          <div className="login__form-group login__form-group--checkbox">
             <input
-              id="checkbox"
+              className="login__checkbox"
+              id="rememberMe"
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
-            <label htmlFor="checkbox" className="checkboxLabel">
+            <label htmlFor="rememberMe" className="login__checkbox-label">
               Remember Me
             </label>
           </div>
-          <div>
-            <p>
-              if you dont register before, please first
-              <Link className="link" to={RegisterRoute}>
+          <div className="login__form-group">
+            <p className="login__text">
+              If you don't have an account, please{' '}
+              <Link className="login__link" to={RegisterRoute}>
                 register
               </Link>
+              .
             </p>
           </div>
         </form>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
