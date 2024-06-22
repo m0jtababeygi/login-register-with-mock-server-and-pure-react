@@ -1,14 +1,15 @@
-import { Users } from "../models/Users";
-import {useState} from 'react';
-import { useNavigate } from "react-router-dom";
-import { DashboardRoute } from "../../pages/routes";
-import Spinner from '../../share/spinner/Spinner';
+import React from "react";
+import Card from "../UI/card/Card";
+import Input from "../UI/input/Input";
+
 
 const Dashboard = () => {
   
     return (
       <>
-        <div>Dashboard</div>
+        <Card>
+          <Input id="x" label="x"/>
+        </Card>
       </>
     )
   }

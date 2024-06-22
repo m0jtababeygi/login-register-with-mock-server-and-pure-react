@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Card from '../UI/card/Card';
-import { RegisterRoute } from '../../pages/routes';
+import { DashboardRoute } from '../../pages/routes';
 import { Users } from '../models/Users';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './Register.css';
+import '../UI/input/Input.css';
+import Input from '../UI/input/Input';
+import Button from '../UI/button/Button';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -15,7 +16,6 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('');
   const [errors, setErrors] = useState<Partial<Users>>({});
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const validate = (): boolean => {
@@ -29,7 +29,7 @@ const Register = () => {
       if (!emailRegex.test(email)) {
         newErrors.email = 'Email address must be include @';
       }
-    } 
+    }
     if (!gender) {
       newErrors.gender = 'Gender is required';
       // newErrors.gender = '';
@@ -79,70 +79,41 @@ const Register = () => {
       });
 
       if (response.ok) {
-        navigate(RegisterRoute);
+        navigate(DashboardRoute);
       }
     }
   }
 
   return (
-    <Card className="register__card">
+    <Card className="register">
       <h3 className="register__title">Register</h3>
       <form className="register__form" onSubmit={registerHandler}>
-        <div className="register__form-group">
-          <label className="register__label" htmlFor="username">
-            Username
-          </label>
-          <input
-            className="register__input"
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          {errors.username && <p className="register__error">{errors.username}</p>}
-        </div>
-        <div className="register__form-group">
-          <label className="register__label" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="register__input"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <p className="register__error">{errors.email}</p>}
-        </div>
-        <div className="register__form-group">
-          <label className="register__label" htmlFor="password">
-            Password
-          </label>
-          <div className="register__password-container">
-            <input
-              className="register__input"
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              className="register__password-toggle"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-            </button>
-          </div>
-          {errors.password && <p className="register__error">{errors.password}</p>}
-          {errors.passwordDetails &&
-            errors.passwordDetails.map((error, index) => (
-              <p key={index} className="register__error">
-                {error}
-              </p>
-            ))}
-        </div>
-        <div className="register__form-group">
-          <label className="register__label" htmlFor="gender">
+        <Input
+          id="username"
+          label="username"
+          type="text"
+          value={username}
+          onChange={setUsername}
+          error={errors.username}
+        />
+        <Input
+          id="email"
+          label="email"
+          value={email}
+          onChange={setEmail}
+          error={errors.email}
+        />
+        <Input
+          id="password"
+          label="password"
+          type="password"
+          value={password}
+          onChange={setPassword}
+          error={errors.password}
+          passwordDetails={errors.passwordDetails}
+        />
+        <div className="input">
+          <label className="input__label" htmlFor="gender">
             Gender
           </label>
           <select
@@ -151,20 +122,19 @@ const Register = () => {
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
-            <option value="" disabled>Select gender</option>
+            <option value="" disabled>
+              Select gender
+            </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+
           {errors.gender && <p className="register__error">{errors.gender}</p>}
         </div>
-        <div className="register__form-group">
-          <button type="submit" className="register__button">
-            Register
-          </button>
-        </div>
+        <Button type="submit">Register</Button>
       </form>
     </Card>
   );
 };
 
-export default Register;
+export default Register

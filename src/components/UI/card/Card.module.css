@@ -1,7 +1,7 @@
 .card {
   margin: 0 auto;
-  width: max-content;
-  max-width: 80vw;
+  /* width: max-content; */
+  /* max-width: 80vw; */
   background-color: rgb(233 239 243);
   padding: 2rem;
   position: relative;

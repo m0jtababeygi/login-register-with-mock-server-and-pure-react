@@ -6,15 +6,14 @@ import { Users } from '../models/Users';
 import { DashboardRoute } from './../../pages/routes';
 import Notification from '../../share/notification/Notification';
 import Spinner from '../../share/spinner/Spinner';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './Login.css';
+import Input from '../UI/input/Input';
+import Button from '../UI/button/Button';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Partial<Users>>({});
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState<{
@@ -80,7 +79,7 @@ const Login = () => {
       try {
         const response = await fetch('http://localhost:5000/users');
         const users: Users[] = await response.json();
-        const user = users.find(
+        const user = await users.find(
           (u: Users) => u.username === username && u.password === password,
         );
         setLoading(false);
@@ -119,7 +118,7 @@ const Login = () => {
         <div className="backdrop">
           <Spinner />
         </div>
-      )}
+      )};
       {notification && (
         <Notification
           message={notification.message}
@@ -132,56 +131,26 @@ const Login = () => {
       <Card className="login__card">
         <h3 className="login__title">Login</h3>
         <form className="login__form" onSubmit={loginHandler}>
-          <div className="login__form-group">
-            <label className="login__label" htmlFor="username">
-              Username
-            </label>
-            <input
-              className="login__input"
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            {errors.username && (
-              <p className="login__error">{errors.username}</p>
-            )}
-          </div>
-          <div className="login__form-group">
-            <label className="login__label" htmlFor="password">
-              Password
-            </label>
-            <div className="login__password-container">
-              <input
-                className="login__input"
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                type="button"
-                className="login__password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-              </button>
-            </div>
-            {errors.password && (
-              <p className="login__error">{errors.password}</p>
-            )}
-            {errors.passwordDetails &&
-              errors.passwordDetails.map((error, index) => (
-                <p key={index} className="login__error">
-                  {error}
-                </p>
-              ))}
-          </div>
-          <div className="login__form-group">
-            <button type="submit" className="login__button">
-              Login
-            </button>
-          </div>
+          <Input
+            id="username"
+            label="username"
+            type="text"
+            value={username}
+            onChange={setUsername}
+            error={errors.username}
+          />
+          <Input
+            id="password"
+            label="password"
+            type="password"
+            value={password}
+            onChange={setPassword}
+            error={errors.password}
+            passwordDetails={errors.passwordDetails}
+          />
+          <Button type="submit">
+            Login
+          </Button>
           <div className="login__form-group login__form-group--checkbox">
             <input
               className="login__checkbox"
@@ -206,7 +175,7 @@ const Login = () => {
         </form>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
