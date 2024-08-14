@@ -7,6 +7,7 @@ import './Register.css';
 import '../UI/input/Input.css';
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
+import { useToaster } from '../../share/toaster/ToasterProvider';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -17,7 +18,7 @@ const Register = () => {
   const [gender, setGender] = useState('');
   const [errors, setErrors] = useState<Partial<Users>>({});
   const navigate = useNavigate();
-
+  const { addToast } = useToaster();
 
   const validate = (): boolean => {
     const newErrors: Partial<Users> = {};
@@ -33,7 +34,6 @@ const Register = () => {
     }
     if (!gender) {
       newErrors.gender = 'Gender is required';
-      // newErrors.gender = '';
     }
     const passwordErrors: string[] = [];
     if (!password) {
@@ -80,7 +80,10 @@ const Register = () => {
       });
 
       if (response.ok) {
+        addToast('successfully registered', 'success');
         navigate(DashboardRoute);
+      } else {
+        addToast('An error occurred. Please try again.', 'error');
       }
     }
   }
