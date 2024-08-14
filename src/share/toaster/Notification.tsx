@@ -8,7 +8,6 @@ import {
   faRectangleXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import './Notification.css';
-import ReactDOM from 'react-dom';
 
 interface NotificationProps {
   message: string;
@@ -42,7 +41,7 @@ const Notification: React.FC<NotificationProps> = ({
     }
   }, [onClose, duration, dismissible]);
 
-  return ReactDOM.createPortal(
+  return (
     <div className={`notification notification--${type}`}>
       <div className="notification__header">
         <div>
@@ -61,8 +60,7 @@ const Notification: React.FC<NotificationProps> = ({
         </div>
       </div>
       <div className="notification__message">{message}</div>
-    </div>,
-    document.getElementById('notification') as HTMLElement,
+    </div>
   );
 };
 

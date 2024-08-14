@@ -4,11 +4,11 @@ import Card from '../UI/card/Card';
 import { RegisterRoute } from '../../pages/routes';
 import { Users } from '../models/Users';
 import { DashboardRoute } from './../../pages/routes';
-import Notification from '../../share/notification/Notification';
 import Spinner from '../../share/spinner/Spinner';
 import './Login.css';
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
+import { useToaster } from '../../share/toaster/ToasterProvider';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,13 +16,8 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Partial<Users>>({});
   const [loading, setLoading] = useState(false);
-  const [notification, setNotification] = useState<{
-    message: string
-    type: 'success' | 'error' | 'warning' | 'info'
-    duration?: number
-    dismissible?: boolean
-  } | null>(null);
   const navigate = useNavigate();
+  const { addToast } = useToaster();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -91,23 +86,14 @@ const Login = () => {
             localStorage.removeItem('username');
             localStorage.removeItem('password');
           }
-          //   setNotification({ message: 'Login successful!', type: 'success', duration: 3000 });
+          addToast('Login successful!', 'success', 3000);
           navigate(DashboardRoute);
         } else {
-          setNotification({
-            message: 'User not found. Please register first.',
-            type: 'error',
-            duration: 5000,
-            dismissible: true,
-          });
+          addToast('User not found. Please register first.', 'error', 5000);
         }
       } catch (error) {
         setLoading(false);
-        setNotification({
-          message: 'An error occurred. Please try again.',
-          type: 'error',
-          duration: 5000,
-        });
+        addToast('An error occurred. Please try again.', 'error', 5000);
       }
     }
   }
@@ -118,15 +104,6 @@ const Login = () => {
         <div className="backdrop">
           <Spinner />
         </div>
-      )};
-      {notification && (
-        <Notification
-          message={notification.message}
-          type={notification.type}
-          onClose={() => setNotification(null)}
-          duration={notification.duration}
-          dismissible={notification.dismissible}
-        />
       )}
       <Card className="login__card">
         <h3 className="login__title">Login</h3>
@@ -148,9 +125,7 @@ const Login = () => {
             error={errors.password}
             passwordDetails={errors.passwordDetails}
           />
-          <Button type="submit">
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
           <div className="login__form-group login__form-group--checkbox">
             <input
               className="login__checkbox"

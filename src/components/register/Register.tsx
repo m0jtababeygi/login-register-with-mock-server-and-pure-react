@@ -18,6 +18,7 @@ const Register = () => {
   const [errors, setErrors] = useState<Partial<Users>>({});
   const navigate = useNavigate();
 
+
   const validate = (): boolean => {
     const newErrors: Partial<Users> = {};
     if (!username) {
