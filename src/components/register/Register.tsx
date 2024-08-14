@@ -84,7 +84,7 @@ const Register = () => {
         navigate(DashboardRoute);
       } else {
         addToast('An error occurred. Please try again.', 'error');
-      }
+      } 
     }
   }
 
